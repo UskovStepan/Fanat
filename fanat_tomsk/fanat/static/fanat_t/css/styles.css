@@ -81,10 +81,11 @@ ul.list-articles li {
 }
 
 .logo {
-	background: url('../images/logo.png') no-repeat 10px 5px;
+	background-image: url('../images/main.jpg');
 	width: 70px;
 	height: 60px;
 }
+
 
 ul.mainmenu {
 	list-style: none;

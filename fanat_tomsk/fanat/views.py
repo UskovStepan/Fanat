@@ -6,6 +6,9 @@ menu = [
 	{'title': 'О клубе', 'url_name': 'about'},
 	{'title': 'Тренера', 'url_name': 'coach'},
 	{'title': 'Расписание', 'url_name': 'schedule'},
+	{'title': 'Цены', 'url_name': 'price'},
+	{'title': 'Магазин', 'url_name': 'shop'},
+	{'title': 'Вход', 'url_name': 'login'},
 ]
 
 db_coach = [
@@ -38,6 +41,9 @@ def schedule(request):
 
 def price(request):
 	return render(request, 'fanat_tomsk/price.html', {'title': 'Цены'})
+
+def shop(request):
+	return render(request, 'fanat_tomsk/shop.html', {'title': 'Магазин'})
 
 def login(request):
 	return render(request, 'fanat_tomsk/login.html', {'title': 'Вход'})
