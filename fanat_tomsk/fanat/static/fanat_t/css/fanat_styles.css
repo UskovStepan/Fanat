@@ -1,0 +1,43 @@
+html, body {
+	font-family: 'Arial';
+	margin: 0;
+	padding: 0;
+	color: #483d3d;
+}
+
+.header {
+	background: #020024;
+	background: linear-gradient(90deg,rgba(2, 0, 36, 1) 35%, rgba(121, 9, 35, 1) 61%, rgba(222, 34, 9, 1) 97%);
+	height: 80px;
+	width: 100%;
+	margin: 0px auto;
+}
+
+.logo {
+	background: url("../images/GPT3.png");
+	margin-top: 4px;
+	margin-left: 4px;
+	width: 70px;
+	height: 65px;
+}
+
+ul.mainmenu {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	height: 100px;
+	color:  #fdc073;
+	font-size: 20px;
+	
+}
+
+ul.mainmenu li {
+	float: left;
+	margin: 30px 10px 0px 30px;}
+
+ul.mainmenu li.logo {margin: 0;}
+ul.mainmenu li.last {float: right; margin-right: 50px;}
+
+ul.mainmenu li a {
+	color: #fdc073;
+	text-decoration: none;}

@@ -8,14 +8,14 @@ menu = [
 	{'title': 'Расписание', 'url_name': 'schedule'},
 	{'title': 'Цены', 'url_name': 'price'},
 	{'title': 'Магазин', 'url_name': 'shop'},
-	{'title': 'Вход', 'url_name': 'login'},
+	{'title': 'Вход', 'url_name': 'login'}
 ]
 
 db_coach = [
 	{'id': 1, 'type_sport': 'Бокс', 'name': 'Белебезьев Сергей Валерьевич'},
 	{'id': 2, 'type_sport': 'Бокс', 'name': 'Мартиросян Альберт Маликсетович'},
 	{'id': 3, 'type_sport': 'ММА', 'name': 'Гончаров Евгений Сергеевич'},
-	{'id': 4, 'type_sport': 'Бокс', 'name': 'Лагунов Сергей Александрович'},
+	{'id': 4, 'type_sport': 'Бокс', 'name': 'Лагунов Сергей Александрович'}
 ]
 
 def index(request):
@@ -25,9 +25,10 @@ def index(request):
 			}
 	return render(request, 'fanat_tomsk/index.html', context=data)
 	
-def show_about(request):
 
+def show_about(request):
 	return render(request, 'fanat_tomsk/about.html', {'title': 'О клубе'})
+
 
 def show_coach(request):
 	data_coach = {
@@ -36,14 +37,18 @@ def show_coach(request):
 	}
 	return render(request, 'fanat_tomsk/coach.html', context=data_coach)
 
+
 def schedule(request):
 	return render(request, 'fanat_tomsk/schedule.html', {'title': 'Расписание'})
+
 
 def price(request):
 	return render(request, 'fanat_tomsk/price.html', {'title': 'Цены'})
 
+
 def shop(request):
 	return render(request, 'fanat_tomsk/shop.html', {'title': 'Магазин'})
+
 
 def login(request):
 	return render(request, 'fanat_tomsk/login.html', {'title': 'Вход'})
