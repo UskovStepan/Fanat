@@ -27,31 +27,35 @@ def index(request):
 	
 
 def show_about(request):
-	return render(request, 'fanat_tomsk/about.html', {'title': 'О клубе'})
+	return render(request, 'fanat_tomsk/about.html', {'menu': menu, 'title': 'О клубе'})
 
 
 def show_coach(request):
 	data_coach = {
+		'menu': menu,
 		'title': 'Тренера',
 		'posts': db_coach,
 	}
 	return render(request, 'fanat_tomsk/coach.html', context=data_coach)
 
+def show_coachview(request, coach_id):
+	return show_coach(request)
+
 
 def schedule(request):
-	return render(request, 'fanat_tomsk/schedule.html', {'title': 'Расписание'})
+	return render(request, 'fanat_tomsk/schedule.html', {'menu': menu, 'title': 'Расписание'})
 
 
 def price(request):
-	return render(request, 'fanat_tomsk/price.html', {'title': 'Цены'})
+	return render(request, 'fanat_tomsk/price.html', {'menu': menu, 'title': 'Цены'})
 
 
 def shop(request):
-	return render(request, 'fanat_tomsk/shop.html', {'title': 'Магазин'})
+	return render(request, 'fanat_tomsk/shop.html', {'menu': menu, 'title': 'Магазин'})
 
 
 def login(request):
-	return render(request, 'fanat_tomsk/login.html', {'title': 'Вход'})
+	return render(request, 'fanat_tomsk/login.html', {'menu': menu, 'title': 'Вход'})
 
 
 def page_not_found(request, exception):

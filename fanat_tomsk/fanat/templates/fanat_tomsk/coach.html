@@ -1,10 +1,13 @@
 {% extends "base.html" %}
+{% load fanattags %}
+
 {% block content %}
-<ul>
-	{% for p in posts %}
-	<li>
-		<p>{{p.name}}</p>
-	</li>	
+<tb valign = 'top' class='left-chapters'>
+<ul id='leftchapters'>
+	{% get_coach as coach %}
+	{% for n in coach %}
+	<li><a href="{% url "coach" n.id %}">{{n.name}}</a></li>
 	{% endfor %}
+	
 </ul>
 {% endblock content %}
