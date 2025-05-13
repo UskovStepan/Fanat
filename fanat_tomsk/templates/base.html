@@ -12,10 +12,10 @@
 
 {% block mainmenu %}
 <div class="header">
+	<a href="{% url 'home' %}">
+		<div class= 'logo'></div>
+	</a>
 	<ul class="mainmenu">
-		<li class="logo"><a href="{% url 'home' %}"><div class="logo"></div></a></li>
-<div class="header">
-	<ul class='mainmenu'>
 		{% for m in menu %}
 		{% if not forloop.last %}<li>{%else%}<li class='last'>{%endif%}
 			<a href="{% url m.url_name %}">{{ m.title }}</a>
@@ -26,9 +26,11 @@
 
 
 <!-- Блок контента -->
-{% block content %}
+<div class='content'>
+	{% block content %}
 
-{% endblock %}  
+	{% endblock %}
+</div>  
 <!-- Конец блока контента -->
 
 
