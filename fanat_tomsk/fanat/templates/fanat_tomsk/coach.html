@@ -1,13 +1,33 @@
 {% extends "base.html" %}
 {% load fanattags %}
+{% load static %}
 
 {% block content %}
-<tb valign = 'top' class='left-chapters'>
-<ul id='leftchapters'>
+<ul class="coach-list">
+    {% for coach in coach_list %}
+    <li class="coach-item">
+        {% if coach.photo %}
+            <img src="{{ coach.photo.url }}" alt="{{ coach.name }}" class="coach-photo">
+        {% else %}
+            <img src="{% static 'images/default_coach.jpg' %}" alt="Default photo" class="coach-photo">
+        {% endif %}
+        <div class="coach-info">
+            <h3>{{ coach.name }}</h3>
+            <p>{{ coach.bio|truncatechars:100 }}</p>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
+
+{% comment %} <ul>
 	{% get_coach as coach %}
 	{% for n in coach %}
-	<li><a href="{% url "coach" n.id %}">{{n.name}}</a></li>
+	<li>
+
+		<h5>{{n.name}}</h5>
+
+	</li>
 	{% endfor %}
-	
-</ul>
-{% endblock content %}
+</ul> {% endcomment %}

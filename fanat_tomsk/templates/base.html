@@ -9,31 +9,37 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+	<div class='site-container'>
+		<div class='side-image left-side'></div>
 
-{% block mainmenu %}
-<div class="header">
-	<a href="{% url 'home' %}">
-		<div class= 'logo'></div>
-	</a>
-	<ul class="mainmenu">
-		{% for m in menu %}
-		{% if not forloop.last %}<li>{%else%}<li class='last'>{%endif%}
-			<a href="{% url m.url_name %}">{{ m.title }}</a>
-		{% endfor %}
-	</ul>
-</div>
-{% endblock mainmenu %}	
-
-
-<!-- Блок контента -->
-<div class='content'>
-	{% block content %}
-
-	{% endblock %}
-</div>  
-<!-- Конец блока контента -->
+		<div class='main-content-wrapper'>
+			{% block mainmenu %}
+			<div class='header'>
+				<ul class='mainmenu'>
+					<li>
+						<a href="{% url 'home' %}">
+							<div class= 'logo'></div>
+						</a>
+					</li>
+					{% for m in menu %}
+					{% if not forloop.last %}<li class='button'>{%else%}<li class='last'>{%endif%}
+						<a href="{% url m.url_name %}">{{ m.title }}</a>
+					{% endfor %}
+				</ul>
+			</div>
+			{% endblock mainmenu %}	
 
 
+			<!-- Блок контента -->
+			<div class='content'>
+				{% block content %}
+
+				{% endblock %}
+			</div>
+		</div>	  
+			<!-- Конец блока контента -->
+		<div class='side-image right-side'></div>
+	</div>
 <!-- Footer -->
 
 <!-- Конец footer'а и страницы -->
