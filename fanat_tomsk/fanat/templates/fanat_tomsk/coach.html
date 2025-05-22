@@ -1,33 +1,27 @@
 {% extends "base.html" %}
-{% load fanattags %}
-{% load static %}
 
 {% block content %}
-<ul class="coach-list">
-    {% for coach in coach_list %}
-    <li class="coach-item">
-        {% if coach.photo %}
-            <img src="{{ coach.photo.url }}" alt="{{ coach.name }}" class="coach-photo">
-        {% else %}
-            <img src="{% static 'images/default_coach.jpg' %}" alt="Default photo" class="coach-photo">
-        {% endif %}
-        <div class="coach-info">
-            <h3>{{ coach.name }}</h3>
-            <p>{{ coach.bio|truncatechars:100 }}</p>
-        </div>
-    </li>
-    {% endfor %}
-</ul>
+<h1>{{post.title}}</h1>
 
-{% endblock content %}
+{% if post.photo %}
+<p><img class = 'img-article-left' src = '{{post.photo.url}}'></p>
+{% endif %}
 
-{% comment %} <ul>
-	{% get_coach as coach %}
-	{% for n in coach %}
-	<li>
+{{post.content|linebreaks}}
 
-		<h5>{{n.name}}</h5>
 
-	</li>
+
+
+<h1>{{title}}</h1>
+
+
+<ul>
+	{% for n in db_coach %}
+        <li>
+            <a href = "{% url n.url_name %}">
+            <h4>{{n.name}}</h4>
+            </a>    
+        </li>
 	{% endfor %}
-</ul> {% endcomment %}
+</ul>
+{% endblock content %}

@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import render, redirect
-from .models import Coach
+from django.shortcuts import render, redirect, get_object_or_404
+
+from .models import Probnic
 
 
 menu = [
@@ -12,21 +13,15 @@ menu = [
 	{'title': 'Вход', 'url_name': 'login'}
 ]
 
-# db_coach = [
-# 	{'id': 1, 'type_sport': 'Бокс', 'name': 'Белебезьев Сергей Валерьевич'},
-# 	{'id': 2, 'type_sport': 'Бокс', 'name': 'Мартиросян Альберт Маликсетович'},
-# 	{'id': 3, 'type_sport': 'ММА', 'name': 'Гончаров Евгений Сергеевич'},
-# 	{'id': 4, 'type_sport': 'Бокс', 'name': 'Лагунов Сергей Александрович'}
-# ]
-
 db_coach = [
-	{'id': 1, 'type_sport': 'Бокс', 'name': 'Майк Тайсон', 'titul': 'КМС по боксу, 2-х кратный чемпион сибирского федерального округа в тяжелом весе'},
-	{'id': 2, 'type_sport': 'Бокс', 'name': 'Флойд Майвезер', 'titul': 'МС международного класса по боксу, 2-х кратный чемпион России'},
-	{'id': 3, 'type_sport': 'Бокс', 'name': 'Геннадий Головкин', 'titul': 'Серебряный призёр Олимпийских игр, чемпион мира в категории любителей. Среди профессионалов двукратный чемпион мира по версиям IBF, WBA и IBO.' },
-	{'id': 4, 'type_sport': 'Самбо', 'name': 'Федор Емельянинко', 'titul': 'четырёхкратный чемпион мира по смешанным боевым искусствам — ММА в тяжёлом весе по версии Pride FC, двукратный — по версии RINGS, двукратный — по версии WAMMA, четырёхкратный чемпион мира и девятикратный чемпион России по боевому самбо.' },
-	{'id': 5, 'type_sport': 'ММА', 'name': 'Хабиб Нурмагомедов', 'titul': 'Бывший чемпион UFC в лёгком весе. Рейтинг Sherdog ставил Нурмагомедова на первое место как в лёгком весе, так и в списке лучших бойцов вне зависимости от весовой категории'},
-	{'id': 6, 'type_sport': 'ММА', 'name': 'Конор Макгрегор', 'titul': 'Первый в истории UFC двойной чемпион, владевший одновременно двумя поясами в разных весовых категориях — полулёгкой и лёгкой.'},
+	{'id': 1, 'type_sport': 'Бокс', 'name': 'Белебезьев Сергей Валерьевич', 'url_name': 'Sergey_Belebezyev' },
+	{'id': 2, 'type_sport': 'Самбо', 'name': 'Очередько Антон', 'url_name': 'Anton_Ocheredko'},
+	{'id': 3, 'type_sport': 'ММА', 'name': 'Кишкин Степан', 'url_name': 'Stepan Kishkin' },
+	{'id': 4, 'type_sport': 'Бокс', 'name': 'Толстых Кирилл', 'url_name': 'Kirill_Tolstykh'},
 ]
+
+
+
 def index(request):
 	data = {
 			'title': 'Главная страница',
@@ -43,17 +38,20 @@ def show_coach(request):
 	data_coach = {
 		'menu': menu,
 		'title': 'Тренера',
-		'posts': db_coach,
+		'db_coach': db_coach,
 	}
 	return render(request, 'fanat_tomsk/coach.html', context=data_coach)
 
-def coach_list(request):
-    coaches = Coach.objects.all()
-    return render(request, 'coach_template.html', {'coach_list': coaches})
 
-
-def show_coachview(request, coach_id):
-	return show_coach(request)
+def show_coachview(request, coach_slug):
+	post = get_object_or_404(Probnic, slug=coach_slug)
+	data = {
+		'title': post.title,
+		'menu': menu, 
+		'post': post,
+		'cat_selected': 1,
+	}
+	return render(request, 'fanat_tomsk/coach.html', data)
 
 
 def schedule(request):
