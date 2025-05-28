@@ -1,27 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{post.title}}</h1>
-
-{% if post.photo %}
-<p><img class = 'img-article-left' src = '{{post.photo.url}}'></p>
-{% endif %}
-
-{{post.content|linebreaks}}
-
-
-
-
-<h1>{{title}}</h1>
-
-
-<ul>
+<ul class = 'coach-list'>
 	{% for n in db_coach %}
-        <li>
-            <a href = "{% url n.url_name %}">
-            <h4>{{n.name}}</h4>
-            </a>    
+        <li class='coach-item'>
+            <h3>{{n.name}}</h3>   
         </li>
 	{% endfor %}
 </ul>
+
 {% endblock content %}

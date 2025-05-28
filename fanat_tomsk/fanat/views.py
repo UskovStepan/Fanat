@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .models import Probnic
+from .models import Coach_new
 
 
 menu = [
@@ -16,7 +16,7 @@ menu = [
 db_coach = [
 	{'id': 1, 'type_sport': 'Бокс', 'name': 'Белебезьев Сергей Валерьевич', 'url_name': 'Sergey_Belebezyev' },
 	{'id': 2, 'type_sport': 'Самбо', 'name': 'Очередько Антон', 'url_name': 'Anton_Ocheredko'},
-	{'id': 3, 'type_sport': 'ММА', 'name': 'Кишкин Степан', 'url_name': 'Stepan Kishkin' },
+	{'id': 3, 'type_sport': 'ММА', 'name': 'Кишкин Степан', 'url_name': 'Stepan_Kishkin' },
 	{'id': 4, 'type_sport': 'Бокс', 'name': 'Толстых Кирилл', 'url_name': 'Kirill_Tolstykh'},
 ]
 
@@ -41,17 +41,6 @@ def show_coach(request):
 		'db_coach': db_coach,
 	}
 	return render(request, 'fanat_tomsk/coach.html', context=data_coach)
-
-
-def show_coachview(request, coach_slug):
-	post = get_object_or_404(Probnic, slug=coach_slug)
-	data = {
-		'title': post.title,
-		'menu': menu, 
-		'post': post,
-		'cat_selected': 1,
-	}
-	return render(request, 'fanat_tomsk/coach.html', data)
 
 
 def schedule(request):

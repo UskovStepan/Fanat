@@ -154,6 +154,7 @@ ul.mainmenu li a:hover {
 /*Тренера*//*----------------------------*/
 .coach-list {
     display: flex;
+	align-items: flex-start;
     flex-wrap: wrap;
     gap: 20px;
     list-style: none;
