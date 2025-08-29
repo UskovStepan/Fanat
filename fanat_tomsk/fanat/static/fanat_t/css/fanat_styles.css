@@ -161,6 +161,10 @@ ul.mainmenu li a:hover {
     padding: 0;
 }
 
+.name_coach{
+	font-size: 8;
+}
+
 .coach-item {
     width: 250px;
     background: white;
@@ -180,6 +184,34 @@ ul.mainmenu li a:hover {
 }
 /*--------------------------------------*/
 /*Расписание*/
+.schedule {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
+.day-card{
+	flex: 1;
+	min-width: 300px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 15px;
+	background-color: #fff;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.day-header {
+	background-color: #292C2F;
+	color: white;
+	padding: 10px;
+	border-radius: 5px;
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+/*--------------------------------------*/
 /*Цены*/
+/*--------------------------------------*/
 /*Магазин*/
+/*--------------------------------------*/
 /*Вход*/

@@ -1,6 +1,8 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
 
+import logging
+
 from .models import Coach_new
 
 
@@ -34,16 +36,35 @@ def show_about(request):
 	return render(request, 'fanat_tomsk/about.html', {'menu': menu, 'title': 'О клубе'})
 
 
-def show_coach(request):
-	data_coach = {
-		'menu': menu,
+def coach(request):
+    coaches = Coach_new.published.all()
+    # return render(request, 'fanat_tomsk/coach.html', {
+    #     'title': 'Тренеры',
+    #     'menu': menu,
+    #     'db_coach': coaches,
+    # })
+    data = {
 		'title': 'Тренера',
-		'db_coach': db_coach,
+		'db_coach': coaches,
+		'menu': menu,
 	}
-	return render(request, 'fanat_tomsk/coach.html', context=data_coach)
+    return render(request, 'fanat_tomsk/coach.html', data)
+
+def show_coach(request, slug):
+    coach = get_object_or_404(Coach_new, slug=slug)
+    data = {
+		'title': coach.name,
+		'menu': menu,
+		'coach': coach,
+	}
+    return render(request, 'fanat_tomsk/show_coach.html', data)
 
 
-def schedule(request):
+def schedule(request, slug):
+    # schedule = get_object_or_404(Schedule, slug = slug)
+    # data = {
+	# 	'type_sport': type_sport
+	# }
 	return render(request, 'fanat_tomsk/schedule.html', {'menu': menu, 'title': 'Расписание'})
 
 

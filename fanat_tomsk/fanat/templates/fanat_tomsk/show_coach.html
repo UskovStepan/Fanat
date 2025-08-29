@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ coach.name }}</h1>
+<p>Вид спорта: {{ coach.type_sport }}</p>
+{% if coach.photo %}
+    <img src="{{ coach.photo.url }}" alt="{{ coach.name }}">
+{% endif %}
+{% endblock %}

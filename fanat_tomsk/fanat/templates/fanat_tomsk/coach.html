@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<ul class = 'coach-list'>
-	{% for n in db_coach %}
-        <li class='coach-item'>
-            <h3>{{n.name}}</h3>   
-        </li>
-	{% endfor %}
+<h1>{{ title }}</h1>
+<ul class="coach-list">
+    {% for coach in db_coach %}
+    <li class="coach-item">
+        <h3>{{ coach.name }}</h3>
+        <a href="{{ coach.get_absolute_url }}">Подробнее</a>
+    </li>
+    {% endfor %}
 </ul>
-
-{% endblock content %}
+{% endblock %}
