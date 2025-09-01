@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-# # Create your models here.
+# Create your models here.
 # class Probnic(models.Model):
 #     title = models.CharField(max_length=255)
 #     slug = models.SlugField(max_length=255, unique=True, db_index=True)
@@ -69,10 +69,10 @@ class Schedule(models.Model):
     weekday = models.ForeignKey(WeekDay, on_delete = models.PROTECT)
     workout_type = models.ForeignKey(WorkoutType, on_delete= models.PROTECT)
     trainer = models.ForeignKey(Coach_new, on_delete=models.PROTECT)
-    start_time = models.TimeField(vorbose_name = 'Время начала')
-    end_time = models.TimeField(vorbose_name = 'Время окончания')
+    start_time = models.TimeField(verbose_name= 'Время начала')
+    end_time = models.TimeField(verbose_name= 'Время окончания')
     
     def __str__(self):
-        return f'{self.weekday} {self.start_time} - {self.end_time}: {self.worout_type}'
+        return f'{self.weekday} {self.start_time} - {self.end_time}: {self.workout_type}'
     
     

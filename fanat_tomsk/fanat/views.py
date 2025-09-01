@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 import logging
 
-from .models import Coach_new
+from .models import Coach_new, WeekDay, Schedule, WorkoutType
 
 
 menu = [
@@ -15,12 +15,12 @@ menu = [
 	{'title': 'Вход', 'url_name': 'login'}
 ]
 
-db_coach = [
-	{'id': 1, 'type_sport': 'Бокс', 'name': 'Белебезьев Сергей Валерьевич', 'url_name': 'Sergey_Belebezyev' },
-	{'id': 2, 'type_sport': 'Самбо', 'name': 'Очередько Антон', 'url_name': 'Anton_Ocheredko'},
-	{'id': 3, 'type_sport': 'ММА', 'name': 'Кишкин Степан', 'url_name': 'Stepan_Kishkin' },
-	{'id': 4, 'type_sport': 'Бокс', 'name': 'Толстых Кирилл', 'url_name': 'Kirill_Tolstykh'},
-]
+# db_coach = [
+# 	{'id': 1, 'type_sport': 'Бокс', 'name': 'Белебезьев Сергей Валерьевич', 'url_name': 'Sergey_Belebezyev' },
+# 	{'id': 2, 'type_sport': 'Самбо', 'name': 'Очередько Антон', 'url_name': 'Anton_Ocheredko'},
+# 	{'id': 3, 'type_sport': 'ММА', 'name': 'Кишкин Степан', 'url_name': 'Stepan_Kishkin' },
+# 	{'id': 4, 'type_sport': 'Бокс', 'name': 'Толстых Кирилл', 'url_name': 'Kirill_Tolstykh'},
+# ]
 
 
 
@@ -60,12 +60,26 @@ def show_coach(request, slug):
     return render(request, 'fanat_tomsk/show_coach.html', data)
 
 
-def schedule(request, slug):
-    # schedule = get_object_or_404(Schedule, slug = slug)
-    # data = {
-	# 	'type_sport': type_sport
-	# }
-	return render(request, 'fanat_tomsk/schedule.html', {'menu': menu, 'title': 'Расписание'})
+def schedule(request):
+    days = WeekDay.objects.all()
+    workout_types = WorkoutType.objects.all()
+    schedules = Schedule.objects.select_related(
+		'weekday', 'workout_type', 'trainer'
+	).all()
+    schedule_by_day ={}
+    for day in days:
+        day_schedules = schedules.filter(weekday = day).order_by('start_time')
+        schedule_by_day[day] = day_schedules
+        
+    context = {
+		'days': days,
+		'workout_types': workout_types,
+		'schedule_by_day': schedule_by_day,
+		'title': 'Расписание тренеровок',
+		'menu': menu
+	}
+    
+    return render(request, 'fanat_tomsk/schedule.html', context)
 
 
 def price(request):

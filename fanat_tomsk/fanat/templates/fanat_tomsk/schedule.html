@@ -1,4 +1,13 @@
 {% extends "base.html" %}
+
 {% block content %}
+<div class="container mt-4">
+    <h1>Расписание тренировок</h1>
+    <tr>
+		{% for day in days %}
+		<th> {{ day.name }} </th>
+		{% endfor %}
+	</tr>
+</div>
 
 {% endblock content %}
