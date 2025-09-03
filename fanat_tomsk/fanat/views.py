@@ -81,6 +81,12 @@ def schedule(request):
     
     return render(request, 'fanat_tomsk/schedule.html', context)
 
+def schedule_type(request, slug):
+    schedule = get_object_or_404(Schedule, slug = slug)
+    data = {
+		'menu': menu
+	}
+    return render(request, 'fanat_tomsk/schedule_type.html')
 
 def price(request):
 	return render(request, 'fanat_tomsk/price.html', {'menu': menu, 'title': 'Цены'})

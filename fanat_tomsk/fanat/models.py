@@ -57,6 +57,7 @@ class WeekDay(models.Model):
 class WorkoutType(models.Model):
     name = models.CharField(max_length=255, verbose_name='Вид спорта')
     description = models.TextField(blank=True, verbose_name = 'Описание')
+    slug = models.SlugField(max_length=255, blank= True, db_index=True, default='')
     #coach = models.ForeignKey(Coach_new, on_delete=models.PROTECT, null=True, blank=True)
     
     def __str__(self):
@@ -72,7 +73,7 @@ class Schedule(models.Model):
     start_time = models.TimeField(verbose_name= 'Время начала')
     end_time = models.TimeField(verbose_name= 'Время окончания')
     
+    
     def __str__(self):
         return f'{self.weekday} {self.start_time} - {self.end_time}: {self.workout_type}'
-    
     
