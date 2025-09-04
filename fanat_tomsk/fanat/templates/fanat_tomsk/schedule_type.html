@@ -1,6 +1,21 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
+<div>
+	<div class="sport-buttons-container">
+		<div class="d-flex justify-content-center flex-wrap gap-3 mb-5">
+			{% for i in wt %}  
+					<a href = '{{ i.get_absolute_url }}' class = 'sport-btn {{i.slug}}'>
+						{{ i.name }}
+					</a>
+			{% endfor %}
+		<div>
+	</div>
+	<h1>{{ title }}</h1>
+	{% for day in days %}
+		<p> {{ day.name }} </p>
+	{% endfor %}
+	
+</div>
 
-{% endblock content %}
+{% endblock %}

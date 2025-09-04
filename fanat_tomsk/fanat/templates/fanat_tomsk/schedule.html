@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mt-4">
-    <h1>Расписание тренировок</h1>
-    <tr>
-		{% for day in days %}
-		<th> {{ day.name }} </th>
+<h1>Расписаине тренеровок</h1>
+<div class="sport-buttons-container">
+	<div class="d-flex justify-content-center flex-wrap gap-3 mb-5">
+		{% for i in workout_types %}  
+				<a href = '{{ i.get_absolute_url }}' class = 'sport-btn {{i.slug}}'>
+					{{ i.name }}
+				</a>
 		{% endfor %}
-	</tr>
+	<div>
 </div>
 
-{% endblock content %}
+{% endblock %}

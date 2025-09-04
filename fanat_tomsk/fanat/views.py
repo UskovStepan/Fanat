@@ -61,32 +61,34 @@ def show_coach(request, slug):
 
 
 def schedule(request):
-    days = WeekDay.objects.all()
     workout_types = WorkoutType.objects.all()
-    schedules = Schedule.objects.select_related(
-		'weekday', 'workout_type', 'trainer'
-	).all()
-    schedule_by_day ={}
-    for day in days:
-        day_schedules = schedules.filter(weekday = day).order_by('start_time')
-        schedule_by_day[day] = day_schedules
-        
     context = {
-		'days': days,
 		'workout_types': workout_types,
-		'schedule_by_day': schedule_by_day,
 		'title': 'Расписание тренеровок',
 		'menu': menu
 	}
-    
     return render(request, 'fanat_tomsk/schedule.html', context)
 
+
 def schedule_type(request, slug):
-    schedule = get_object_or_404(Schedule, slug = slug)
+    workout_type = get_object_or_404(WorkoutType, slug = slug)
+    wt = WorkoutType.objects.all()
+    schedules = Schedule.objects.select_related(
+		'weekday', 'workout_type', 'trainer'
+	).all()
+    days = WeekDay.objects.all()
+     
     data = {
-		'menu': menu
+		'menu': menu,
+  		'days': days,
+		'workuot_type': workout_type,
+		'schedules': schedules,
+		'wt': wt,
+		'title': f'Расписание по - {workout_type.name}'
 	}
-    return render(request, 'fanat_tomsk/schedule_type.html')
+    
+    return render(request, 'fanat_tomsk/schedule_type.html', data)
+
 
 def price(request):
 	return render(request, 'fanat_tomsk/price.html', {'menu': menu, 'title': 'Цены'})

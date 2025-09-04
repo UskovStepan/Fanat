@@ -184,30 +184,65 @@ ul.mainmenu li a:hover {
 }
 /*--------------------------------------*/
 /*Расписание*/
-.schedule {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 20px;
+
+.sport-buttons-container {
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    flex-wrap: wrap;
+    gap: 20px; /* Равное расстояние между кнопками */
+    margin-bottom: 30px;
 }
 
-.day-card{
-	flex: 1;
-	min-width: 300px;
-	border: 1px solid #ddd;
-	border-radius: 8px;
-	padding: 15px;
-	background-color: #fff;
-	box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+.sport-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    min-width: 140px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.day-header {
-	background-color: #292C2F;
-	color: white;
-	padding: 10px;
-	border-radius: 5px;
-	text-align: center;
-	font-weight: bold;
-	margin-bottom: 15px;
+.sport-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    color: white;
+    text-decoration: none;
+}
+
+.boxing {
+    background: linear-gradient(135deg, #9c767a, #c82333);
+}
+
+.boxing_children {
+    background: linear-gradient(135deg,  #9c767a, #c82333);
+}
+
+.sambo {
+    background: linear-gradient(135deg,  #9c767a, #c82333);
+}
+
+.mma {
+    background: linear-gradient(135deg, #9c767a, #c82333);
+}
+
+@media (max-width: 768px) {
+    .sport-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        min-width: 120px;
+    }
+    
+    .d-flex {
+        gap: 2px !important;
+    }
 }
 /*--------------------------------------*/
 /*Цены*/

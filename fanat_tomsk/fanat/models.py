@@ -49,6 +49,7 @@ class WeekDay(models.Model):
     def __str__(self):
         return self.name
     
+    
     class Meta:
         ordering = ['order']
         verbose_name= 'День недели'
@@ -62,6 +63,9 @@ class WorkoutType(models.Model):
     
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse("schedule_type", kwargs={"slug": self.slug})
     
     class Meta:
         verbose_name = 'Вид спорта'
