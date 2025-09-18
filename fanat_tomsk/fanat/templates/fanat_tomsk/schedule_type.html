@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<h1>{{title}}</h1>
 <div>
 	<div class="sport-buttons-container">
 		<div class="d-flex justify-content-center flex-wrap gap-3 mb-5">
@@ -11,11 +13,23 @@
 			{% endfor %}
 		<div>
 	</div>
-	<h1>{{ title }}</h1>
-	{% for day in days %}
-		<p> {{ day.name }} </p>
-	{% endfor %}
-	
+	<ul class = 'no-bullets'>
+		{% for day in days %}
+			<li>
+				<strong>{{ day.name }}</strong>
+				<ul>
+					{% for worktime in day.workouts %}
+						<li>
+							{{ worktime.start_time|time:"H:i" }} - {{ worktime.end_time|time:"H:i" }}
+							Тренер: {{ worktime.trainer.name }}
+						</li>
+					{% empty %}
+						<li>Нет тренировок в этот день</li>
+					{% endfor %}
+				</ul>
+			</li>
+		{% endfor %}
+	</ul>
 </div>
 
 {% endblock %}
