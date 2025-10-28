@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db import models
 
 import logging
 
@@ -70,24 +71,33 @@ def schedule(request):
     return render(request, 'fanat_tomsk/schedule.html', context)
 
 
-def schedule_type(request, slug):
-    workout_type = get_object_or_404(WorkoutType, slug = slug)
-    wt = WorkoutType.objects.all()
-    schedules = Schedule.objects.select_related(
-		'weekday', 'workout_type', 'trainer'
-	).all()
-    days = WeekDay.objects.all()
-     
-    data = {
-		'menu': menu,
-  		'days': days,
-		'workuot_type': workout_type,
-		'schedules': schedules,
-		'wt': wt,
-		'title': f'Расписание по - {workout_type.name}'
-	}
+def schedule_type(request, slug=None):
+    if slug is None:
+        slug = 'box'
     
-    return render(request, 'fanat_tomsk/schedule_type.html', data)
+    workout_type = get_object_or_404(WorkoutType, slug=slug)
+    wt = WorkoutType.objects.all()
+    days = WeekDay.objects.prefetch_related(
+        models.Prefetch(
+            'schedule_set',
+            queryset=Schedule.objects.select_related(
+                'workout_type', 'trainer'
+            ).filter(workout_type=workout_type),
+            to_attr='workouts'
+        )
+    ).order_by('order')
+    
+
+    
+    context = {
+        'menu': menu,
+        'days': days,
+        'workout_type': workout_type,
+        'wt': wt,
+        'title': f'{workout_type.name}'
+    }
+    
+    return render(request, 'fanat_tomsk/schedule_type.html', context)
 
 
 def price(request):
